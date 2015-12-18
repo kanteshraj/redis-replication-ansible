@@ -1,0 +1,2 @@
+master_ip: "{{ hostvars[groups['master'][0]]['ansible_ssh_host'] }}"
+master_port: 6379

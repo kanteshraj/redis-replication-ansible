@@ -1,0 +1,17 @@
+---
+- hosts: all
+  sudo: yes
+  roles:
+    - common
+
+- hosts: master
+  sudo: yes
+  roles:
+    - redis_repl
+
+- hosts: slave
+  sudo: yes
+  roles:
+    - redis_repl
+  vars:
+    slave: true

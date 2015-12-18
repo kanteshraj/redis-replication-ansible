@@ -1,0 +1,16 @@
+---
+- name: Check current timezone
+  shell: readlink -f /etc/localtime | sed -e 's/\/usr\/share\/zoneinfo\///'
+  register: current_zone
+  changed_when: False
+
+
+- name: Set UTC timezone
+  file: src=/usr/share/zoneinfo/{{ timezone }}  dest=/etc/localtime state=link force=yes
+  when: current_zone.stdout != '{{ timezone }}'
+
+- name: Install epel-release
+  yum: name=epel-release state=present update_cache=yes
+
+- name: Overcommit memory setting to 1
+  sysctl: name=vm.overcommit_memory value=1 state=present sysctl_set=yes reload=yes
