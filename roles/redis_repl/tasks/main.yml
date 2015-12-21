@@ -1,2 +1,11 @@
 ---
-- include: redis.yml
+- name: Install redis server
+  yum: name=redis state=present
+
+- name: Enable redis service
+  service: name=redis enabled=yes
+
+- name: Configure redis server Configure
+  template: src=redis.conf.j2 dest=/etc/redis.conf mode=0644
+  notify:
+    - restart redis-server
