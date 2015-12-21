@@ -22,7 +22,7 @@ Start vagrant VMs and provision by using ansible.
 
 (After the first time) Execute ansible playbook.
 
-    $ vagrant provosion
+    $ vagrant provision
 
 Check replication status.
 
